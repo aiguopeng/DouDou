@@ -1,0 +1,58 @@
+<apex:page controller="AccountAndCaseInfoController" title="顧客ケース" action="{!init}">
+ 
+    <apex:form id="studenForm">
+         <style>
+                   tr.dataRow { 
+                       background-color:white; 
+                    }
+                    tr.dataRow:hover { 
+                            background-color: #e3f3ff;
+                     };
+               </style>
+    	<apex:pageBlock title="学生詳細情報" mode="edit" id="studentBlock">
+       
+            <apex:outputPanel id="studenPanel">
+            	 <table style="width:96%;margin:0px 10px 10px 10px;">
+                <tr>
+					<td>学生ID:</td><td>{!studentList[0].ID__c}</td>
+                    <td>学生名:</td><td>{!studentList[0].Name}</td>
+                    <td>保証人:</td><td>{!studentList[0].PromisePerson__r.Name}</td>
+                </tr>
+                  <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>  
+                  <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>  
+                 <tr>
+                    <td>数学平均点数:</td><td>{!studentList[0].MathAve__c}</td>
+                    <td>英語平均点数:</td><td>{!studentList[0].EnglishAve__c}</td>
+                    <td>国語平均点数:</td><td>{!studentList[0].ChineseAve__c}</td>
+                </tr>  
+                </table>
+            </apex:outputPanel> 
+       　　 </apex:pageBlock>
+               
+        
+    	<apex:pageBlock title="成績詳細情報" mode="edit" id="student">
+       
+            <apex:outputPanel id="stdentGradePanel">
+                
+             <apex:pageBlockTable value="{!studentGradeList}" var="gradList" id="gradListTBL" style="width:96%; margin: 0px 2%; border-top: thin solid black;">
+                    <!-- 数学 -->
+                    <apex:column style="width:15em; text-align:left; border-right: thin solid black; border-bottom: thin solid black;" headerClass="TableTitle">
+                        <apex:facet name="header"><apex:outputText value="数学" /></apex:facet>
+                        <apex:outputText value="{!gradList.Math__c}"  id="Math" />
+                    </apex:column>
+                    <!-- 英語 -->
+                    <apex:column style="width:15em; text-align:left; border-right: thin solid black; border-bottom: thin solid black;" headerClass="TableTitle">
+                        <apex:facet name="header"><apex:outputText value="英語" /></apex:facet>
+                        <apex:outputText value="{!gradList.English__c}"  id="English" />
+                    </apex:column>
+                    <!-- 英語 -->
+                    <apex:column style="width:15em; text-align:left; border-right: thin solid black; border-bottom: thin solid black;" headerClass="TableTitle">
+                        <apex:facet name="header"><apex:outputText value="国語" /></apex:facet>
+                        <apex:outputText value="{!gradList.Chinese__c}"  id="Chinese" />
+                    </apex:column>
+                </apex:pageBlockTable>
+                
+            </apex:outputPanel> 
+        </apex:pageBlock>
+	</apex:form>
+  </apex:page>

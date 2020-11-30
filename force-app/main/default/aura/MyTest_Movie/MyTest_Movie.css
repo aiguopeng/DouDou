@@ -1,0 +1,10 @@
+.THIS {
+    font-size: 12px;
+    color:red;
+}
+.THIS table th{
+   border: 1px solid blue;
+   color:blue;
+   padding:15px;
+   border-width:1px 1px 1px 1px;
+}

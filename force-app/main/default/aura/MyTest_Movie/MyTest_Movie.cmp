@@ -1,0 +1,38 @@
+<aura:component controller="MyTestMovieController">
+    <aura:handler name="init" value="{!this}" action="{!c.myAction}"/>
+  
+    <aura:attribute name="message" type="String" />
+    
+    <aura:attribute name="results" type="List" description="电影列表"/>        
+    <aura:attribute name="count" type="Integer" default="0" description="电影记录数"/> 
+    <div>
+  
+    <table  class="slds-table slds-table--bordered slds-table--cell-buffer">
+            <thead>
+                <tr>
+                    <th><div>映画名</div></th>
+                    <th><div>監督</div></th>
+                    <th><div>主役</div></th>
+                    <th><div>テーマ曲</div></th>
+                    <th><div>上映時間</div></th>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.results}" var="item">
+                    <tr> 
+                        <td><div>{!item.Name}</div></td>
+                        <td><div>{!item.Director__c}</div></td>
+                        <td><div>{!item.ToStar__c}</div></td>
+                        <td><div>{!item.Theme__c}</div></td>
+                        <td><div>{!item.ShowTime__c}</div></td>
+                        <td>
+                            <lightning:formattedDateTime value="{!item.Release_Time__c}"  year="numeric" month="numeric" day="numeric"  />
+                        </td>
+                    </tr>                    
+                </aura:iteration>
+            </tbody>
+        </table>
+    <div>&nbsp;</div>
+    <span class="slds-size_small" style="float:right;">共{!v.count}条记录</span>
+   </div>
+</aura:component>

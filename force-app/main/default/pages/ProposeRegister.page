@@ -1,0 +1,312 @@
+<apex:page id="top" controller="ProposeRegisterController" action="{!init}" showheader="false" sidebar="false"  title="提案登録">
+    <style>
+    .bPageBlock  {
+        border-top: 1px solid #222 !important;
+        }
+
+    </style>
+        <apex:form id="form">
+            <!-- メッセージ -->
+            <apex:pageMessages id="pageMessages"/>
+            <apex:outputPanel rendered="{!AND(NOT(isSystemErrorFlg), NOT(isURLErrorFlg))}">
+                <div>
+                    <table style="width:96%; margin: 0px 2%; ">
+                        <tr>
+                            <td style="width: 20%;">
+                            </td>
+                            <td style="width: 12.2%;">
+                                <apex:commandButton action="{!doSave}" value="保存" styleClass="subWindowSaveBtn" />
+                            </td>
+                            <td style="width: 15.8%;">
+                            </td>
+                            <td style="width: 52%;">
+                                <apex:commandButton value="キャンセル" styleClass="subWindowCancelBtn" onclick="window.close();" />
+                            </td>
+                        </tr>
+                    </table>
+                    <apex:pageBlock Id="pageBlockId">
+                    <table style="width:96%; margin: 0px 2%; ">
+                        <tr>
+                            <th>
+                                <apex:outputlabel value="社員情報" />
+                            </th>
+                        </tr>
+                    </table>
+                <table  style="width:96%; margin: 0px 2%; ">
+                    <tr>
+                        <td style="text-align: right; width: 15%;">
+                            <apex:outputText value="氏名　" />
+                        </td>
+                        <td style="width: 35%;">
+                            <apex:outputField value="{!EmployeeList[0].FirstName__c}" /><apex:outputField value="{!EmployeeList[0].LastName__c}" />
+                        </td>
+                        <td style="text-align: right; width: 15%;">
+                            <apex:outputText value="性別　" />
+                        </td>
+                        <td style="width: 35%;">
+                            <apex:outputField value="{!EmployeeList[0].Sex__c}" />
+                        </td>
+                    </tr>
+                    <tr><td></td><td></td><td></td><td></td></tr>
+                    <tr>
+                        <td style="text-align: right; width: 15%;">
+                            <apex:outputText value="年齢　" />
+                        </td>
+                        <td>
+                            <apex:outputField value="{!EmployeeList[0].Age__c}" />
+                        </td>
+                        <td style="text-align: right; width: 15%;">
+                            <apex:outputText value="社員区分　" />
+                        </td>
+                        <td>
+                            <apex:outputField value="{!EmployeeList[0].EmployeeDivision__c}" />
+                        </td>
+                    </tr>
+                    <tr><td></td><td></td><td></td><td></td></tr>
+                    <tr>
+                        <td style="text-align: right;">
+                            <apex:outputText value="給料（月額）　" />
+                        </td>
+                        <td>
+                            <apex:outputField value="{!EmployeeList[0].Salary__c}" />
+                        </td>
+                        <td style="text-align: right;">
+                            <apex:outputText value="入場可能時間　" />
+                        </td>
+                        <td>
+                            <apex:outputField value="{!EmployeeList[0].StartJobDay__c}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;">
+                            <apex:outputText value="最小提案単価" />
+                        </td>
+                        <td>
+                            <apex:outputField value="{!EmployeeList[0].SmallMonthPrice__c}" />
+                        </td>
+                        <td style="text-align: right;">
+                            <apex:outputText value="最大提案単価　" />
+                        </td>
+                        <td>
+                            <apex:outputField value="{!EmployeeList[0].BigMonthPrice__c}" />
+                        </td>
+                    </tr>
+                    <tr><td></td><td></td><td></td><td></td></tr>
+                    <tr>
+                        <td style="text-align: right;">
+                            <apex:outputText value="日本語　" />
+                        </td>
+                        <td>
+                            <apex:outputField value="{!EmployeeList[0].JapaneseLevel__c}" />
+                        </td>
+                        <td>
+                            <apex:outputText value="" />
+                        </td>
+                        <td>
+                            <apex:outputText value="" />
+                        </td>
+                    </tr>
+                </table>
+                </apex:pageBlock>
+                 <apex:pageBlock >
+                    <table style="width:96%; margin: 0px 2%; ">
+                        <tr>
+                            <th>
+                                <apex:outputlabel value="案件情報" />
+                            </th>
+                        </tr>
+                    </table>
+
+                <table  style="width:96%; margin: 0px 2%; ">
+                    <tr>
+                        <td style="text-align: right; width: 15%;">
+                            <apex:outputText value="氏名　" />
+                        </td>
+                        <td style="width: 35%;">
+                            <apex:outputField value="{!EmployeeList[0].FirstName__c}" /><apex:outputField value="{!EmployeeList[0].LastName__c}" />
+                        </td>
+                        <td style="text-align: right; width: 15%;">
+                            <apex:outputText value="性別　" />
+                        </td>
+                        <td style="width: 35%;">
+                            <apex:outputField value="{!EmployeeList[0].Sex__c}" />
+                        </td>
+                    </tr>
+                    <tr><td></td><td></td><td></td><td></td></tr>
+                    <tr>
+                        <td style="text-align: right; width: 15%;">
+                            <apex:outputText value="案件名　" />
+                        </td>
+                        <td>
+                            <apex:outputField value="{!AnkenList[0].Name}" />
+                        </td>
+                        <td style="text-align: right; width: 15%;">
+                            <apex:outputText value="顧客名　" />
+                        </td>
+                        <td>
+                            <apex:outputField value="{!AnkenList[0].Account__r.Name}" />
+                        </td>
+                    </tr>
+                    <tr><td></td><td></td><td></td><td></td></tr>
+                    <tr>
+                        <td style="text-align: right;">
+                            <apex:outputText value="緊急度　" />
+                        </td>
+                        <td>
+                            <apex:outputField value="{!AnkenList[0].Level__c}" />
+                        </td>
+                        <td style="text-align: right;">
+                            <apex:outputText value="確度　" />
+                        </td>
+                        <td>
+                            <apex:outputField value="{!AnkenList[0].Confirm__c}" />
+                        </td>
+                    </tr>
+                    <tr><td></td><td></td><td></td><td></td></tr>
+                    <tr>
+                        <td style="text-align: right;">
+                            <apex:outputText value="稼働時間（から）　" />
+                        </td>
+                        <td>
+                            <apex:outputField value="{!AnkenList[0].MonthTimeFrom__c}" />
+                        </td>
+                        <td style="text-align: right;">
+                            <apex:outputText value="稼働時間（まで）　" />
+                        </td>
+                        <td>
+                            <apex:outputField value="{!AnkenList[0].MonthTimeTo__c}" />
+                        </td>
+                    </tr>
+                    <tr><td></td><td></td><td></td><td></td></tr>
+                    <tr>
+                        <td style="text-align: right;">
+                            <apex:outputText value="月単価（から）" />
+                        </td>
+                        <td>
+                            <!-- <apex:outputText value="{0, number, ###,###,###,###}" id="MonthPriceFrom">
+                                <apex:param value="{!AnkenList[0].MonthPriceFrom__c}" /> 
+                            </apex:outputText> -->
+                            <apex:param value="{!AnkenList[0].MonthPriceFrom__c}" /> 
+                        </td>
+                        <td style="text-align: right;">
+                            <apex:outputText value="月単価（まで）" />
+                        </td>
+                        <td>
+                           <!--  <apex:outputText value="{0, number, ###,###,###,###}" id="MonthPriceTo">
+                                <apex:param value="{!AnkenList[0].MonthPriceTo__c}" />
+                            </apex:outputText> -->
+                            <apex:param value="{!AnkenList[0].MonthPriceTo__c}" />
+                        </td>
+                    </tr>
+                </table>
+                </apex:pageBlock>
+                <apex:pageBlock id="ProposeInfoId">
+                    <table style="width:96%; margin: 0px 2%; ">
+                        <tr>
+                            <th>
+                                <apex:outputlabel value="提案情報" />
+                            </th>
+                        </tr>
+                    </table>
+                    <table style="width:96%; margin: 0px 2%; ">
+                        <tr>
+                            <td style="width: 17%;">
+                                <apex:outputlabel value="開始時間" />
+                            </td>
+                            <td style="width: 33%;">
+                                <div class="required" style="display: inline-block; _display: inline; width: 98.5%;">
+                                    <apex:inputField value="{!propose.StartDay__c}" style="width: 100%;" />
+                                </div>
+                            </td>
+                            <td style="width: 17%;">
+                            </td>
+                            <td style="width: 33%;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 17%;">
+                            </td>
+                            <td style="width: 33%;">
+                                <apex:outputPanel rendered="{!startDayInputFlg}">
+                                    <apex:outputText value="必須項目になります" style="color:red;" />
+                                </apex:outputPanel>
+                            </td>
+                            <td style="width: 17%;">
+                            </td>
+                            <td style="width: 33%;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 17%;">
+                                <apex:outputlabel value="契約期間" />
+                            </td>
+                            <td style="width: 33%;">
+                                <div style="display: inline-block; _display: inline; width: 98.5%;">
+                                    <apex:inputField value="{!propose.ContractPeriod__c}" style="width: 100%;" />
+                                </div>
+                            </td>
+                            <td style="width: 17%;">
+                            </td>
+                            <td style="width: 33%;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 17%;">
+                            </td>
+                            <td style="width: 33%;">
+                                <apex:outputPanel rendered="{!contractPeriodInputFlg}">
+                                    <apex:outputText value="必須項目になります" style="color:red;" />
+                                </apex:outputPanel>
+                            </td>
+                            <td style="width: 17%;">
+                            </td>
+                            <td style="width: 33%;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 17%;">
+                                <apex:outputlabel value="提案単価" />
+                            </td>
+                            <td style="width: 33%;">
+                                <div class="required" style="display: inline-block; _display: inline; width: 98.5%;">
+                                    <apex:inputField value="{!propose.MonthPrice__c}" style="width: 100%;" id="MonthPrice" />
+                                </div>
+                            </td>
+                            <td style="width: 17%;">
+                            </td>
+                            <td style="width: 33%;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 17%;">
+                            </td>
+                            <td style="width: 33%;">
+                                <apex:outputPanel rendered="{!monthPriceInputFlg}">
+                                    <apex:outputText value="必須項目になります" style="color:red;" />
+                                </apex:outputPanel>
+                            </td>
+                            <td style="width: 17%;">
+                            </td>
+                            <td style="width: 33%;">
+                            </td>
+                        </tr>
+                    </table>
+                    </apex:pageBlock>
+                    <table style="width:96%; margin: 0px 2%; ">
+                        <tr>
+                            <td style="width: 20%;">
+                            </td>
+                            <td style="width: 12.2%;">
+                                <apex:commandButton action="{!doSave}" value="保存" styleClass="subWindowSaveBtn" />
+                            </td>
+                            <td style="width: 15.8%;">
+                            </td>
+                            <td style="width: 52%;">
+                                <apex:commandButton value="キャンセル" status="status_message" styleClass="subWindowCancelBtn" onclick="window.close();" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </apex:outputPanel>
+        </apex:form>
+</apex:page>
